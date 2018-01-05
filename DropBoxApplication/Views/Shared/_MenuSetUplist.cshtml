@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DropBoxApplication.Models.MenuSetUpViewModel>
+
+<div class="clearfix"></div>
+@*<div id="states-loading-progress" style="display: none;" class="loader alert alert-dismissible ">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong> Please wait..  !</strong>
+    </div>*@
+
+
+<div class="table-responsive tables">
+    <div class="ContenedorTabla">
+        <table id="pruebatabla" class="table table-striped table-bordered">
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="10">No Record's found.</td>
+                </tr>
+            }
+            else
+            {
+                <thead>
+                    <tr>
+                        <th id='column-header-1'> Id</th>
+                        <th id='column-header-2'>Menu Name</th>
+                        <th id='column-header-3'>Category Name</th>
+                        <th id='column-header-4'>Product Name</th>
+                        <th id='column-header-4'>Remove</th>
+                    </tr>
+                </thead>
+                foreach (var item in Model)
+                {
+                    <tbody class="searchable">
+                        <tr>
+                            <td>@item.id</td>
+                            <td>@item.MenuName</td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.ProductName</td>
+                            <td><a href="@Url.Action("RemoveSetupMenu", "MenuSetupMaster",new { @id= @item.id})" class="btn btn-primary btn-sm">X</a></td>
+                        </tr>
+                    </tbody>
+                }
+            }
+        </table>
+    </div>
+</div>
+
+
+
+<style type="text/css">
+    table#pruebatabla th,
+    table#pruebatabla td {
+        white-space: nowrap;
+        padding: 3px 6px;
+        word-wrap: break-word;
+        overflow: hidden;
+        /*overflow-x: auto;*/
+    }
+</style>
+@*<script type="text/javascript">
+        $(function () {
+            var thHeight = $("table#pruebatabla th:first").height();
+            $("table#pruebatabla th").resizable({
+                handles: "e",
+                minHeight: thHeight,
+                maxHeight: thHeight,
+                minWidth: 140, maxWidth: 100,
+                resize: function (event, ui) {
+                    var sizerID = "#" + $(event.target).attr("id") + "-sizer";
+                    $(sizerID).width(ui.size.width);
+                }
+            });
+        });
+    </script>*@
+

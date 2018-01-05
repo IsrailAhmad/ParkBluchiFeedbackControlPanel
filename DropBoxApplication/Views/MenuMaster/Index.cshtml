@@ -1,0 +1,62 @@
+﻿@model DropBoxApplication.Models.MenuMasterModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddNewMenu", "MenuMaster", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>Success! </strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
+    <div class="panel panel-default">
+        <div class="panel-heading">Menu Master</div>
+        <div class="panel-body">
+            <div class="col-sm-12 ">
+
+                @Html.HiddenFor(model => model.MenuId, new { id = "MenuId" })
+                <div class="row">
+                    @*<div class="col-lg-3">
+                        @Html.DropDownListFor(m => m.StoreName, (IEnumerable<SelectListItem>)ViewBag.StoreList, new { id = "StoreName", @class = "form-group form-control" })
+                        @Html.ValidationMessageFor(m => m.StoreName)
+                    </div>*@
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.MenuName, new { id = "MenuName", @class = "form-group form-control", placeholder = "Menu Name" })
+                        @Html.ValidationMessageFor(model => model.MenuName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.MenuPrice, new { id = "MenuPrice", @class = "form-group form-control", placeholder = "Menu Price" })
+                        @Html.ValidationMessageFor(model => model.MenuPrice, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group form-control btn btn-default image-preview-input">
+                            <input type="file" id="file" name="file" />
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="submit" value="Add" class="form-group form-control btn btn-default" />
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="reset" value="Reset" class="form-group form-control btn btn-default" />
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

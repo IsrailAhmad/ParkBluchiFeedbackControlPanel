@@ -1,0 +1,245 @@
+﻿@model DropBoxApplication.Models.MenuSetupMasterModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("SetupMenu", "MenuSetupMaster", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>Success! </strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Menu Setup</div>
+        <div class="panel-body">
+            <div class="col-sm-12 ">
+                <div class="row">
+                    <div class="col-lg-3">
+                        @Html.DropDownListFor(m => m.StoreName, (IEnumerable<SelectListItem>)ViewBag.StoreList, new { id = "StoreName", @class = "form-group form-control" })
+                        @Html.ValidationMessageFor(m => m.StoreName)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.DropDownListFor(m => m.MenuName, (IEnumerable<SelectListItem>)ViewBag.MenuList, new { id = "MenuName", @class = "form-group form-control" })
+                        @Html.ValidationMessageFor(m => m.MenuName)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.DropDownListFor(m => m.CategoryName, (IEnumerable<SelectListItem>)ViewBag.CategoryList, new { id = "CategoryName", @class = "form-group form-control" })
+                        @Html.ValidationMessageFor(m => m.CategoryName)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.DropDownListFor(m => m.ProductName, (IEnumerable<SelectListItem>)ViewBag.ProductList, new { id = "ProductName", @class = "form-group form-control" })
+                        @Html.ValidationMessageFor(m => m.ProductName)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-10">
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="button" value="Add" id="btnAdd" class="btn btn-default form-group form-control" />
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="reset" value="Reset" id="btnReset" class="btn btn-default form-group form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Menu Setup List</div>
+        <div class="panel-body">
+            <div class="col-sm-12 ">
+                <div id="partial-load"></div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $('#btnAdd').click(function () {
+            debugger
+            var strStoreName = $('#StoreName option:selected').val();
+            var strMenuName = $('#MenuName option:selected').val();
+            var strCategoryName = $('#CategoryName option:selected').val();
+            var strProductName = $('#ProductName option:selected').val();
+            //if (strFranchiseeName == "Select FranchiseeName" || strFranchiseeName == undefined) {
+            //    debugger
+            //    alert('Please select Franchisee Name');
+            //}
+            //else if (strFeName == "" || strFeName == null) {
+            //    alert('Please select your FE Name ');
+            //}
+            //else if (strClientName == "" || strClientName == null || strClientName == "Select Client") {
+            //    alert('Please select  Client');
+            //}
+            //else if (strCaseType == "" || strCaseType == null || strCaseType == "Select Location") {
+            //    alert('Please select  Location');
+            //}
+            //else if (strDropBoxType == "" || strDropBoxType == null || strDropBoxType == "Select DropBox") {
+            //    alert('Please select  DropBox');
+            //}
+            //else if (strTransactionDateFrom == "" || strTransactionDateFrom == null) {
+            //    alert('Please select Transaction Date From ');
+            //}
+            //else if (strTransactionDateTo == "" || strTransactionDateTo == null) {
+            //    alert('Please select Transaction Date From');
+            //}
+            //else {
+            var qry = {
+                StoreName:strStoreName,
+                MenuName: strMenuName,
+                CategoryName: strCategoryName,
+                ProductName: strProductName
+            };
+            var btn = $(this)
+            btn.button('loading')
+            setTimeout(function () {
+                btn.button('reset')
+            }, 5000)
+            // var statesProgress = $("#states-loading-progress");
+            //statesProgress.show(); $('#btnExport').show(); $('#filter').show();
+            $.ajax({
+                type: 'Post',
+                url: '/MenuSetupMaster/SetupMenu',
+                dataType: 'json',
+                data: qry,
+                traditional: true,
+                async: true,
+                success: function (Results) {
+                    if (Results != null) {
+                        $('#partial-load').empty().append(Results); statesProgress.hide();
+                    }
+                },
+                error: function (Results) {
+                    if (Results != null) {
+                        $(this).button('loading').delay(1000).queue(function () {
+                            $('#partial-load').empty().append(Results.responseText);
+                            statesProgress.hide();
+                            $('#btnExport').show(); $('#filter').show();
+                            $(this).button('complete');
+                            $(this).dequeue();
+                        });
+
+                    }
+                }
+            });
+            //}
+        });
+    </script>
+    <script>
+        //$(document).ready(function () {
+        //    $.ajax({
+        //        type: 'Post',
+        //        url: '/MenuSetupMaster/GetAllMenuList',
+        //        dataType: 'json',
+        //        traditional: true,
+        //        async: true,
+        //        success: function (Results) {
+        //            if (Results != null) {
+        //                $('#partial-load').empty().append(Results); statesProgress.hide();
+        //            }
+        //        },
+        //        error: function (Results) {
+        //            if (Results != null) {
+        //                $(this).button('loading').delay(1000).queue(function () {
+        //                    $('#partial-load').empty().append(Results.responseText);
+        //                    statesProgress.hide();
+        //                    $('#btnExport').show(); $('#filter').show();
+        //                    $(this).button('complete');
+        //                    $(this).dequeue();
+        //                });
+
+        //            }
+        //        }
+        //    });
+        //});
+    </script>
+
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $('#MenuName').change(function () {
+        //        debugger
+        //        var strMenuName = $('#MenuName option:selected').val();
+        //        var qry = {
+        //            MenuName: strMenuName,
+        //        };
+        //        //var $ddFeName = $('#FieldExective');
+        //        //$ddFeName.empty(); // Clear all Items
+        //        //$ddFeName.append($("<option></option>").val('').html('Please Wait...'));
+        //        $.ajax({
+        //            type: 'Post',
+        //            url: '/MenuSetupMaster/GetAllMenuList',
+        //            dataType: 'json',
+        //            data: qry,
+        //            traditional: true,
+        //            async: true,
+        //            success: function (Results) {
+        //                if (Results != null) {
+        //                    $('#partial-load').empty().append(Results); statesProgress.hide();
+        //                }
+        //            },
+        //            error: function (Results) {
+        //                if (Results != null) {
+        //                    $(this).button('loading').delay(1000).queue(function () {
+        //                        $('#partial-load').empty().append(Results.responseText);
+        //                        statesProgress.hide();
+        //                        $('#btnExport').show(); $('#filter').show();
+        //                        $(this).button('complete');
+        //                        $(this).dequeue();
+        //                    });
+
+        //                }
+        //            }
+        //        });
+        //    });
+        //});
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#StoreName').change(function () {
+                debugger
+                var strStoreName = $('#StoreName option:selected').val();
+                var qry = {
+                    StoreName: strStoreName,
+                };
+                //var $ddFeName = $('#FieldExective');
+                //$ddFeName.empty(); // Clear all Items
+                //$ddFeName.append($("<option></option>").val('').html('Please Wait...'));
+                $.ajax({
+                    type: 'Post',
+                    url: '/MenuSetupMaster/GetAllMenuListByStore',
+                    dataType: 'json',
+                    data: qry,
+                    traditional: true,
+                    async: true,
+                    success: function (Results) {
+                        if (Results != null) {
+                            $('#partial-load').empty().append(Results); statesProgress.hide();
+                        }
+                    },
+                    error: function (Results) {
+                        if (Results != null) {
+                            $(this).button('loading').delay(1000).queue(function () {
+                                $('#partial-load').empty().append(Results.responseText);
+                                statesProgress.hide();
+                                $('#btnExport').show(); $('#filter').show();
+                                $(this).button('complete');
+                                $(this).dequeue();
+                            });
+
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
+

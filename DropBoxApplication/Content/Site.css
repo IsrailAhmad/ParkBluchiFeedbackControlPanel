@@ -1,0 +1,269 @@
+﻿body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+  
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/***
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+body {
+    background: #F1F3FA;
+}
+
+/* Profile container */
+.profile {
+    margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+    padding: 20px 0 10px 0;
+    background: #fff;
+}
+
+.profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+
+.profile-usertitle {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+    .profile-userbuttons .btn {
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 6px 15px;
+        margin-right: 5px;
+    }
+
+        .profile-userbuttons .btn:last-child {
+            margin-right: 0px;
+        }
+
+.profile-usermenu {
+    margin-top: 30px;
+}
+
+    .profile-usermenu ul li {
+        border-bottom: 1px solid #f0f4f7;
+    }
+
+        .profile-usermenu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .profile-usermenu ul li a {
+            color: #93a3b5;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+            .profile-usermenu ul li a i {
+                margin-right: 8px;
+                font-size: 14px;
+            }
+
+            .profile-usermenu ul li a:hover {
+                background-color: #fafcfd;
+                color: #5b9bd1;
+            }
+
+        .profile-usermenu ul li.active {
+            border-bottom: none;
+        }
+
+            .profile-usermenu ul li.active a {
+                color: #5b9bd1;
+                background-color: #f6f9fb;
+                border-left: 2px solid #5b9bd1;
+                margin-left: -2px;
+            }
+
+/* Profile Content */
+.profile-content {
+    padding: 20px;
+    background: #fff;
+    min-height: 460px;
+}
+
+
+#myProgress {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+}
+
+#myBar {
+    position: absolute;
+    width: 10%;
+    height: 100%;
+    background-color: #4CAF50;
+}
+
+#label {
+    text-align: center;
+    line-height: 10px;
+    color: white;
+}
+
+.gallery {
+    margin-top: 10px;
+}
+
+.gallery-item {
+    /*margin-bottom: 30px;*/
+    height: 300px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.pagination {
+    margin: 0;
+}
+
+
+
+.img-responsive {
+    /* other definitions */
+    /*width:100%;*/
+    height: 250px;
+}
+.loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('../fonts/103.gif') 50% 50% no-repeat #f9f9f9;
+}
+
+
+
+/*.panel-default {
+ opacity: 0.9;
+/*margin-top:30px;*/
+/*}*/
+/*.tables {
+	width: 76em;
+	overflow-x: auto;
+	white-space: nowrap;
+    height:350px;
+}*/
+
+
+/*table {
+    white-space: nowrap;width: 76em;
+}
+
+th, td {
+  white-space: nowrap;width: 76em;
+
+
+}
+
+thead, tfoot, tbody {
+display: block;  width: 76em; position:relative;
+}
+
+tbody { 
+overflow-y: scroll; 
+max-height: 40vh; white-space: nowrap;width: 76em;
+}*/
+
+
+/*table {
+    background-color: #aaa;
+}
+tbody {
+    background-color: #ddd;
+    height: 100px;
+    overflow: auto;
+}
+td {
+    padding: 3px 10px;
+}
+
+thead > tr, tbody{
+    display:block;}*/
+
+
+/*.modal { 
+    position: fixed; 
+    top: 3%; 
+    right: 3%; 
+    left: 3%; 
+    width: auto; 
+    margin: 0; 
+}
+.modal-body { 
+    height: 80%; 
+}
+
+.modal-body { 
+    max-height: 350px; 
+    padding: 15px; 
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch; 
+ }*/
+
+.list-group-item {
+    border:0px;
+    padding:2px 15px;
+}

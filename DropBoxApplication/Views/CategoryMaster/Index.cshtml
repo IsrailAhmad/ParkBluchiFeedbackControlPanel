@@ -1,0 +1,66 @@
+﻿@model DropBoxApplication.Models.CategoryMasterModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddNewCategory", "CategoryMaster", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>Success! </strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Category Master</div>
+        <div class="panel-body">
+            <div class="col-sm-12 ">
+                @Html.HiddenFor(model => model.CategoryId, new { id = "CategoryId" })
+                <div class="row">
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.CategoryName, new { id = "CategoryName", @class = "form-group form-control", placeholder = "Category Name" })
+                        @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group form-control btn btn-default image-preview-input">
+                            <input type="file" id="file" name="file" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="submit" value="Add" class="form-group form-control btn btn-default" />
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="reset" value="Reset" class="form-group form-control btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="panel panel-default">
+            <div class="panel-heading">Categories Records</div>
+            <div class="panel-body">
+                <div class="col-sm-12 ">
+                    <div id="partial-load"></div>
+                </div>
+            </div>
+        </div>*@
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#success-alert").slideUp(500);
+        });
+    </script>
+}
+
+
+
+
+

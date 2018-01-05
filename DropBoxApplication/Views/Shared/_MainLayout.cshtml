@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Control Panel</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>*@
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Home", "Index", "MenuSetupMaster", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @*<li>@Html.ActionLink("Dashboard", "Dashboard", "Main")</li>*@
+                    <li>@Html.ActionLink("MenuSetUp", "Index", "MenuSetupMaster")</li>
+                    @*<li>@Html.ActionLink("Locality", "Index", "LocalityMaster")</li> *@
+                    @*<li>@Html.ActionLink("Store", "Index", "StoreMaster")</li>*@
+                    <li>@Html.ActionLink("Menu", "Index", "MenuMaster")</li>
+                    <li>@Html.ActionLink("Category", "Index", "CategoryMaster")</li>
+                    <li>@Html.ActionLink("Product", "Index", "ProductMaster")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="col-md-12">
+
+            @{var LoginID = Session["LoginID"] != null ? Convert.ToInt32(Session["LoginID"]) : 0;}
+            @{ var username = Session["Username"] != null ? Convert.ToString(Session["Username"]) : ""; }
+            @if (LoginID > 0 && username != "")
+            {
+
+                @*@if (HttpContext.Current.Session["LoginID"].ToString() != null && HttpContext.Current.Session["Username"].ToString() != null)
+                    {*@
+                <div class="alert alert-dismissible alert-warning">
+                    <img src="~/fonts/logo120x120.png" height="100" width="100" />
+                    <div class="pull-right">
+                        <h3>Welcome to @ViewBag.Username !</h3>
+                        <p>@ViewBag.LoginID  </p>
+                    </div>
+
+                </div>
+            }
+            @RenderBody() <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Microsys Technologies India </p>
+            </footer>
+        </div>
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿@model DropBoxApplication.Models.ProductMasterModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@using (Html.BeginForm("AddNewProduct", "ProductMaster", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+
+    if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>Success! </strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
+    <div class="panel panel-default">
+        <div class="panel-heading">Product Master</div>
+        <div class="panel-body">
+            <div class="col-sm-12 ">
+                <div class="row">
+                    @Html.HiddenFor(model => model.ProductId, new { id = "ProductId" })
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.ProductName, new { id = "ProductName", @class = "form-group form-control", placeholder = "ProductName" })
+                        @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.Price, new { id = "UnitPrice", @class = "form-group form-control", placeholder = "Price" })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="btn btn-default image-preview-input form-group form-control">
+                            <input type="file" id="file" name="file" />
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="submit" value="Add" id="btnAdd" class="form-group form-control btn btn-default" />
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="reset" value="Reset" id="btnReset" class="form-group form-control btn btn-default" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                        <label for="FoodType" class="control-label">
+                            Veg
+                        </label>
+                    </div>
+                    <div class="col-lg-1">
+                        @Html.RadioButtonFor(model => model.FoodType, "V", new { id = "TaxType", @class = "form-group form-control" })
+                    </div>
+                    <div class="col-lg-1">
+                        <label for="FoodType" class="control-label">
+                            Non-Veg
+                        </label>
+                    </div>
+                    <div class="col-lg-1">
+                        @Html.RadioButtonFor(model => model.FoodType, "N", new { id = "TaxType", @class = "form-group form-control" })
+                    </div>
+                    <div class="col-lg-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#success-alert").slideUp(500);
+        });
+    </script>
+}
+
+
+
+
